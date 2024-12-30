@@ -1,0 +1,5 @@
+streamlit
+google.generativeai
+streamlit_monaco
+
+# pip install -r requirements.txt 
