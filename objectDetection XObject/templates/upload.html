@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Upload</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-1/4 bg-blue-900 text-white h-screen p-5">
+            <h2 class="text-2xl font-bold mb-4">
+                <p class="mb-2"><a href="{{ url_for('home') }}" class="hover:underline">Home</a></p>
+            </h2>
+            <ul>
+                <li class="mb-2"><a href="{{ url_for('index') }}" class="hover:underline">Upload Video</a></li>
+                <li class="mb-2"><a href="{{ url_for('result') }}" class="hover:underline">View Results</a></li>
+                <li class="mb-2"><a href="{{ url_for('uploaded_videos') }}" class="hover:underline">Uploaded Videos</a></li>
+            </ul>
+        </div>
+        <!-- Main Content -->
+        <div class="w-3/4 p-10">
+            <h1 class="text-3xl font-bold mb-5">Upload Video for Object Detection and Tracking</h1>
+            <form id="uploadForm" method="post" enctype="multipart/form-data" class="bg-white p-5 rounded shadow-md">
+                {{ form.hidden_tag() }}
+                <div class="mb-4">
+                    <label class="block text-gray-700">{{ form.video_file.label }}</label>
+                    {{ form.video_file(class="mt-1 block w-full") }}
+                </div>
+                <div>
+                    {{ form.submit(class="bg-blue-500 text-white px-4 py-2 rounded") }}
+                </div>
+            </form>
+            <div id="detectedObjects" class="mt-10 bg-white p-5 rounded shadow-md" style="display:none;">
+                <h2 class="text-2xl font-bold mb-5">Detected Objects</h2>
+                <div id="objectList" class="mb-5"></div>
+                <input type="text" id="targetObject" placeholder="Enter target object" class="border p-2 w-full mb-3">
+                <button id="trackButton" class="bg-blue-500 text-white px-4 py-2 rounded">Track Object</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- save Detection times for each occurrence: in a txt file -->
+
+
+    <script>
+        $('#uploadForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '/',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('#detectedObjects').show();
+                    $('#objectList').empty(); // Clear previous results
+                    response.detected_objects.forEach(function(obj) {
+                        $('#objectList').append('<p>' + obj + '</p>');
+                    });
+                },
+                error: function() {
+                    alert('An error occurred while uploading the video.');
+                }
+            });
+        });
+
+        $('#trackButton').on('click', function() {
+            var targetObject = $('#targetObject').val();
+            if (!targetObject) {
+                alert('Please enter a target object to track.');
+                return;
+            }
+            var videoPath = 'uploads/' + $('#uploadForm input[type="file"]').val().split('\\').pop(); // Get the video file name
+            $.post('/track', { target_object: targetObject, video_path: videoPath}, function(response) {
+                alert(response.message);
+                
+            }).fail(function() {
+                alert('An error occurred while tracking the object.');
+            });
+        });
+    </script>
+</body>
+</html>

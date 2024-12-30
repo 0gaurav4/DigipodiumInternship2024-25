@@ -1,0 +1,16 @@
+Occurrence #1: Start = 0.28 sec, End = 0.56 sec
+Occurrence #2: Start = 0.76 sec, End = 1.32 sec
+Occurrence #3: Start = 1.40 sec, End = 1.44 sec
+Occurrence #4: Start = 1.52 sec, End = 1.60 sec
+Occurrence #5: Start = 2.32 sec, End = 2.44 sec
+Occurrence #6: Start = 2.56 sec, End = 2.60 sec
+Occurrence #7: Start = 3.76 sec, End = 3.80 sec
+Occurrence #8: Start = 4.00 sec, End = 4.04 sec
+Occurrence #9: Start = 4.32 sec, End = 4.52 sec
+Occurrence #10: Start = 4.76 sec, End = 4.80 sec
+Occurrence #11: Start = 5.28 sec, End = 5.72 sec
+Occurrence #12: Start = 5.84 sec, End = 5.88 sec
+Occurrence #13: Start = 6.04 sec, End = 6.16 sec
+Occurrence #14: Start = 6.40 sec, End = 6.44 sec
+Occurrence #15: Start = 6.68 sec, End = 6.84 sec
+Occurrence #16: Start = 6.92 sec, End = 6.96 sec
