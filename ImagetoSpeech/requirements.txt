@@ -1,0 +1,4 @@
+google-generativeai
+gTTS
+langdetect
+deep-translator
