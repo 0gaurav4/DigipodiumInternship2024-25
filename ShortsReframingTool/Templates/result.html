@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold">Generated Clips</h1>
+<ul class="mt-6">
+    {% for video in videos %}
+    <li class="mb-4">
+        <h2 class="text-xl font-bold">{{ video.filename }}</h2>
+        <ul>
+            {% for clip in video.clips %}
+            <li>
+                <a href="{{ url_for('download_clip', video_id=video.id, clip_filename=clip.clip_filename) }}" class="text-blue-500 hover:underline">{{ clip.clip_filename }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('delete_video', video_id=video.id) }}" class="text-red-500 hover:underline">Delete Video</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
