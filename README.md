@@ -13,3 +13,4 @@ Projects basics
 9. 2D to 3D Image Converter 
 10. Mutual Fund, Stocks, Gold, Silver, Platinum, Data API (wealth calculator)
 11. Insta, Facebook, Linkedin API User posts and comments 
+12. Linkedin https://www.kaggle.com/code/uycung/job-recommendations-with-embeddings  https://www.kaggle.com/datasets/arshkon/linkedin-job-postings?select=postings.csv
